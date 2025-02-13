@@ -38,6 +38,12 @@ class Student(db.Model):
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
 
+class Message(db.Model):  # ✅ NEW: Message Model
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
+    student_name = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
 # Ensure the app context is active when creating the database tables
 with app.app_context():
     db.create_all()
@@ -98,19 +104,21 @@ def dashboard():
         return redirect(url_for('login'))
 
     student = Student.query.get(session['student_id'])
+    messages = Message.query.order_by(Message.id.desc()).all()  # Fetch messages from DB
 
     if request.method == 'POST':
         if 'user_input' in request.form:
             user_input = request.form['user_input']
             student_name = session['student_name']
 
-            # Save the user message with their name to a text file
-            with open("messages.txt", "a", encoding="utf-8") as file:
-                file.write(f"{student_name}: {user_input}\n")
+            # Save the user message to the database
+            new_message = Message(student_id=student.id, student_name=student_name, content=user_input)
+            db.session.add(new_message)
+            db.session.commit()
 
             flash('Message saved!', 'success')
 
-    return render_template('dashboard.html', student=student)
+    return render_template('dashboard.html', student=student, messages=messages)
 
 # Logout Route
 @app.route('/logout')
