@@ -4,7 +4,7 @@ import string
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
-from flask_migrate import Migrate
+
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ app = Flask(__name__)
 # Configuration
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Prevents warning
+
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx', 'xlsx'}
 
@@ -26,7 +26,7 @@ app.config['MAIL_PASSWORD'] = 'your_email_password'
 
 # Initialize extensions
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
 mail = Mail(app)
 
 # Ensure uploads directory exists
