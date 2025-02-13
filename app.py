@@ -25,6 +25,7 @@ app.config['MAIL_PASSWORD'] = 'your_email_password'
 
 # Initialize extensions
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 mail = Mail(app)
 
 # Ensure uploads directory exists
