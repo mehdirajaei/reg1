@@ -4,6 +4,7 @@ import string
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
+from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
