@@ -1,0 +1,7 @@
+Flask
+Flask-SQLAlchemy
+Flask-Mail
+gunicorn
+Werkzeug
+flask-wtf
+flask-upload

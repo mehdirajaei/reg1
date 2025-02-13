@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Recovery</title>
+</head>
+<body>
+    <h1>Password Recovery</h1>
+
+    <form method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required><br>
+        <button type="submit">Recover Password</button>
+    </form>
+
+    <p>Remember your password? <a href="{{ url_for('login') }}">Login here</a></p>
+</body>
+</html>

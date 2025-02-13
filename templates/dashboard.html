@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ student.name }}</h1>
+
+    <h2>Write a Message</h2>
+    <form action="{{ url_for('dashboard') }}" method="POST">
+        <textarea name="user_input" placeholder="Write something..." required></textarea><br>
+        <button type="submit">Save Message</button>
+    </form>
+
+    <h2>Upload a File</h2>
+    <form action="{{ url_for('upload_page') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <br><br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
